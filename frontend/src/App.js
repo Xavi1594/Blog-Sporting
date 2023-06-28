@@ -1,10 +1,12 @@
-
+import { BlogHome } from "./components/BlogHome";
 
 function App() {
   return (
-    <div className="App">
-    
-    </div>
+   <>
+   <BlogHome />
+   
+   
+   </>
   );
 }
 
