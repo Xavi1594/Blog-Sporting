@@ -20,7 +20,8 @@ export const ApiPosts = () => {
         <div key={post.id}>
             <img
             src={post.img_post}
-            alt='foto'
+            className="img-fluid rounded mt-3"
+            style={{ width: '100px', height: '100px' }}
             />
           <h2>{post.titulo_post}</h2>
           <p>{post.contenido_post}</p>
