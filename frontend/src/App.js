@@ -1,9 +1,9 @@
-import { BlogHome } from "./components/pages/BlogHome";
+import { RouterPrincipal } from "./router/PrincipalRouter";
 
 function App() {
   return (
    <>
-   <BlogHome />
+   <RouterPrincipal />
    
    
    </>

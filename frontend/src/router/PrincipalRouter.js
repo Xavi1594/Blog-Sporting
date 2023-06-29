@@ -1,5 +1,10 @@
 import React from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { BlogHome } from "../components/pages/BlogHome";
+import { BlogPost } from "../components/pages/BlogPost";
+import { EditPost } from "../components/pages/EditPost";
+import { NewPost } from "../components/pages/NewPost";
+import { NavComponent } from "../components/layout/NavComponent";
 
 
 export const RouterPrincipal = () => {
@@ -7,41 +12,21 @@ export const RouterPrincipal = () => {
   return (
     <div>
       <BrowserRouter>
-        {loggedIn ? (
-          <NavbarComponent
-            loggedIn={loggedIn}
-            isAdmin={isAdmin}
-            onLogout={handleLogout}
-          />
-        ) : (
-          <NotLoggedNavbarComponent onLogout={handleLogout} />
-        )}
+      <NavComponent />
         <Routes>
           <Route
             path="/"
-            element={<LoginFormComponent onLogin={handleLogin} />}
+            element={<BlogHome />}
           />
-          <Route path="/registro" element={<RegisterFormComponent />} />
+          <Route path="/post/:id" element={<BlogPost />} />
           <Route
-            path="/perfil"
-            element={<ProfileComponent loggedIn={loggedIn} />}
+            path="/post/editar"
+            element={<EditPost />}
           />
-          <Route path="/amigos" element={<FriendsComponent />} />
-          <Route path="/amigosagregados" element={<FriendsAddedComponent />} />
-          {loggedIn && (
-            <Route
-              path="/posts"
-              element={<PostComponent loggedIn={loggedIn} />}
-            />
-          )}
-          <Route
-            path="/amigos/:userId"
-            element={<OtherProfilesComponent loggedIn={loggedIn} />}
-          />
-
-          <Route path="/usuarios" element={<UsuariosComponent />} />
+          <Route path="/post/nuevo" element={<NewPost />} />
+         
         </Routes>
-        <FooterComponent />
+        {/* <FooterComponent /> */}
       </BrowserRouter>
     </div>
   );
