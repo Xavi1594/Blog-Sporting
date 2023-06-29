@@ -85,31 +85,31 @@ app.get("/posts",  (req, res) => {
     }
   });
   
-//   // Eliminar un post por su ID
-//   app.delete("/posts/:id", authenticateMiddleware, (req, res) => {
-//     const postId = req.params.id;
+  // Eliminar un post por su ID
+  app.delete("/posts/:id", (req, res) => {
+    const Id = req.params.id;
   
-//     const sql = "DELETE FROM post WHERE id = ?";
-//     db.query(sql, [postId], (err, result) => {
-//       if (err) {
-//         console.error("Error al eliminar el post:", err);
-//         res.status(500).json({
-//           message:
-//             "Ha ocurrido un error al eliminar el post. Por favor, intenta más tarde.",
-//         });
-//         return;
-//       }
+    const sql = "DELETE FROM posts WHERE id = ?";
+    db.query(sql, [Id], (err, result) => {
+      if (err) {
+        console.error("Error al eliminar el post:", err);
+        res.status(500).json({
+          message:
+            "Ha ocurrido un error al eliminar el post. Por favor, intenta más tarde.",
+        });
+        return;
+      }
   
-//       if (result.affectedRows === 0) {
-//         res
-//           .status(404)
-//           .json({ message: "No se encontró el post con el ID especificado." });
-//         return;
-//       }
+      if (result.affectedRows === 0) {
+        res
+          .status(404)
+          .json({ message: "No se encontró el post con el ID especificado." });
+        return;
+      }
   
-//       res.json({ message: "El post ha sido eliminado correctamente." });
-//     });
-//   });
+      res.json({ message: "El post ha sido eliminado correctamente." });
+    });
+  });
   
 //   // Editar un post por su ID
 //   app.put("/posts/:id", (req, res) => {

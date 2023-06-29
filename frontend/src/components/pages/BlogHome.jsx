@@ -1,11 +1,12 @@
-import React from 'react'
-import { ApiPosts } from '../apiCalls/ApiPosts'
+import React from 'react';
+import { ApiPosts } from '../apiCalls/ApiPosts';
 
 export const BlogHome = () => {
-    return (
-      <div>
-       
+  return (
+    <main>
+      <section>
         <ApiPosts />
-      </div>
-    );
-  };
+      </section>
+    </main>
+  );
+};
