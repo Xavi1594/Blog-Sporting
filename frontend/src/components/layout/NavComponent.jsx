@@ -1,6 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export const NavComponent = () => {
+  const navigate = useNavigate();
+
+  const handleCreatePost = () => {
+    navigate("/post/nuevo");
+  };
+
   return (
     <header className="text-center" style={{ background: "#e30613", color: "#ffffff", backdropFilter: "blur(5px)" }}>
       <div className="d-flex align-items-center justify-content-center">
@@ -14,7 +21,7 @@ export const NavComponent = () => {
         </div>
       </div>
       <nav>
-        <button className="btn btn-success mr-3">Añadir entrada</button>
+        <button onClick={handleCreatePost} className="btn btn-success m-1">Añadir entrada</button>
       </nav>
     </header>
   );

@@ -24,7 +24,7 @@ export const RouterPrincipal = () => {
             path="/post/editar"
             element={<EditPost />}
           />
-          <Route path="/post/nuevo" element={<NewPost />} />
+          <Route path="/post/nuevo" element={<NewPost/>} />
          
         </Routes>
        <FooterComponent />

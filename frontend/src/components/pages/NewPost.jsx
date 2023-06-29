@@ -1,7 +1,10 @@
 import React from 'react'
+import { ApiNewPost } from '../apiCalls/ApiNewPost'
 
 export const NewPost = () => {
   return (
-    <div>NewPost</div>
+    <article>
+      <ApiNewPost />
+    </article>
   )
 }
