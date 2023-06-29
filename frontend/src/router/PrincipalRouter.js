@@ -5,6 +5,7 @@ import { BlogPost } from "../components/pages/BlogPost";
 import { EditPost } from "../components/pages/EditPost";
 import { NewPost } from "../components/pages/NewPost";
 import { NavComponent } from "../components/layout/NavComponent";
+import { FooterComponent } from "../components/layout/FooterComponent";
 
 
 export const RouterPrincipal = () => {
@@ -26,7 +27,7 @@ export const RouterPrincipal = () => {
           <Route path="/post/nuevo" element={<NewPost />} />
          
         </Routes>
-        {/* <FooterComponent /> */}
+       <FooterComponent />
       </BrowserRouter>
     </div>
   );
