@@ -61,6 +61,16 @@ export const ApiNewPost = () => {
             onChange={(e) => setImage(e.target.files[0])}
           />
         </div>
+        {image && (
+          <div className="form-group">
+            <label>Vista previa de la imagen:</label>
+            <img
+              src={`http://localhost:3000/${image.name}`}
+              alt="Vista previa"
+              className="img-fluid"
+            />
+          </div>
+        )}
         <button
           type="button"
           className="btn btn-primary"

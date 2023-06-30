@@ -14,7 +14,7 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-app.use(express.static("public"));
+app.use(express.static("uploads"));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -39,14 +39,15 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-app.get("/posts",  (req, res) => {
+app.get("/posts", (req, res) => {
   db.query(
     "SELECT id, img_post, titulo_post, fecha_post, contenido_post FROM posts",
     (err, results) => {
       if (err) {
         console.error("Error al obtener los posts:", err);
         res.status(500).json({
-          message: "Ha ocurrido un error al obtener los posts. Por favor, intenta más tarde.",
+          message:
+            "Ha ocurrido un error al obtener los posts. Por favor, intenta más tarde.",
         });
         return;
       }
@@ -54,6 +55,8 @@ app.get("/posts",  (req, res) => {
     }
   );
 });
+
+
 
 app.post('/posts', upload.single('imagen'), (req, res) => {
   const newPost = {
