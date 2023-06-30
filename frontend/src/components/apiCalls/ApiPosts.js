@@ -40,11 +40,10 @@ export const ApiPosts = () => {
   }
 
   const truncateText = (text, maxLength) => {
-    const words = text.split(" ");
-    if (words.length <= maxLength) {
+    if (text.length <= maxLength) {
       return text;
     }
-    return words.slice(0, maxLength).join(" ") + "...";
+    return text.substring(0, maxLength).trim() + "...";
   };
 
   return (
@@ -54,13 +53,11 @@ export const ApiPosts = () => {
           {group.map((post) => (
             <div className="col-md-4 mb-4" key={post.id}>
               <div className="card h-100">
-                <div style={{ maxHeight: '200px', overflow: 'hidden' }}>
+                <div className="aspect-ratio">
                   <img
                     src={`http://localhost:3000/${post.img_post}`}
                     className="card-img-top"
                     alt="Imagen del post"
-                    style={{ objectFit: 'cover', height: '100%', width: '100%' }}
-                    onClick={() => console.log("Click en la imagen de la entrada")}
                   />
                 </div>
                 <div className="card-body d-flex flex-column">
@@ -74,7 +71,7 @@ export const ApiPosts = () => {
                     {truncateText(post.contenido_post, 50)}
                   </p>
                   <button
-                    className="btn btn-danger mt-auto mb-5"
+                    className="btn btn-danger mt-auto"
                     onClick={() => handleDeletePost(post.id)}
                   >
                     Borrar &times;

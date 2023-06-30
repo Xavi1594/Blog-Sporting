@@ -34,7 +34,7 @@ export const ApiNewPost = () => {
 
   return (
     <div className="container mt-5">
-      <h2 className="mb-4">Crear nueva entrada</h2>
+      <h2 className="mb-4 text-center">Nueva entrada</h2>
       <form>
         <div className="form-group">
           <label>Título</label>
@@ -49,6 +49,7 @@ export const ApiNewPost = () => {
           <label>Contenido</label>
           <textarea
             className="form-control"
+            rows="15"
             value={content}
             onChange={(e) => setContent(e.target.value)}
           ></textarea>
@@ -57,7 +58,7 @@ export const ApiNewPost = () => {
           <label>Imagen</label>
           <input
             type="file"
-            className="form-control-file"
+            className="form-control"
             onChange={(e) => setImage(e.target.files[0])}
           />
         </div>
@@ -73,7 +74,7 @@ export const ApiNewPost = () => {
         )}
         <button
           type="button"
-          className="btn btn-primary"
+          className="btn btn-primary mt-2"
           onClick={handleCreatePost}
         >
           Crear entrada
