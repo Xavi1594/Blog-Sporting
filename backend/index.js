@@ -119,6 +119,48 @@ app.delete("/posts/:id", (req, res) => {
   });
 });
 
+app.put("/posts/:id", (req, res) => {
+  const postId = req.params.id;
+  const { title, content, user_img } = req.body;
+  const updatedAt = new Date();
+
+  if (!title && !content) {
+    res.status(400).json({
+      message:
+        "Debes proporcionar al menos un campo (título o contenido) para editar el post.",
+    });
+    return;
+  }
+
+  const sql =
+    "UPDATE posts SET titulo_post = ?, contenido_post = ?, fecha_post = ?, img_post = ? WHERE id = ?";
+  db.query(
+    sql,
+    [title, content, updatedAt, user_img, postId],
+    (err, result) => {
+      if (err) {
+        console.error("Error al editar el post:", err);
+        res.status(500).json({
+          message:
+            "Ha ocurrido un error al editar el post. Por favor, intenta más tarde.",
+        });
+        return;
+      }
+
+      if (result.affectedRows === 0) {
+        res
+          .status(404)
+          .json({ message: "No se encontró el post con el ID especificado." });
+        return;
+      }
+
+      res.json({ message: "El post ha sido editado correctamente." });
+    }
+  );
+});
+
+
+
 app.listen(port, () => {
   console.log(`Servidor iniciado en el puerto ${port}`);
 });
