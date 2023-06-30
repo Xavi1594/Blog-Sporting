@@ -21,14 +21,24 @@ export const BlogPostDetail = () => {
   }
 
   return (
-    <div>
-      <img src={`http://localhost:3000/${post.img_post}`} alt="Imagen del post" />
-      <h1>{post.titulo_post}</h1>
-      <p>Fecha de publicación: {post.fecha_publicacion}</p>
-      <p>{post.contenido_post}</p>
-      <button>Editar</button>
-      <button>Guardar (modo edición)</button>
-      <button>Borrar</button>
+    <div className="container mt-4">
+      <div className="row">
+        <div className="col-md-8 offset-md-2">
+          <img
+            src={`http://localhost:3000/${post.img_post}`}
+            className="img-fluid mb-4"
+            alt="Imagen del post"
+          />
+          <h1 className="text-center">{post.titulo_post}</h1>
+          <p className="text-center">Fecha de publicación: {post.fecha_publicacion}</p>
+          <p>{post.contenido_post}</p>
+          <div className="d-flex justify-content-center">
+            <button className="btn btn-primary me-2">Editar</button>
+            <button className="btn btn-secondary me-2">Guardar</button>
+            <button className="btn btn-danger">Borrar</button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
