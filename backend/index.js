@@ -2,8 +2,8 @@ const express = require("express");
 const session = require("express-session");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const db = require("./dbConecction"); 
-const multer = require('multer');
+const db = require("./dbConecction");
+const multer = require("multer");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -27,13 +27,12 @@ app.use(
   })
 );
 
-
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads');
+    cb(null, "uploads");
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + '-' + file.originalname);
+    cb(null, Date.now() + "-" + file.originalname);
   },
 });
 
@@ -56,9 +55,7 @@ app.get("/posts", (req, res) => {
   );
 });
 
-
-
-app.post('/posts', upload.single('imagen'), (req, res) => {
+app.post("/posts", upload.single("imagen"), (req, res) => {
   const newPost = {
     user_img: req.file.filename,
     title: req.body.titulo_post,
@@ -75,13 +72,14 @@ app.post('/posts', upload.single('imagen'), (req, res) => {
         newPost.content,
         newPost.Id,
         newPost.createdAt,
-        newPost.user_img
+        newPost.user_img,
       ],
       (err, results) => {
         if (err) {
           console.error("Error al crear el post:", err);
           res.status(500).json({
-            message: "Ha ocurrido un error al crear el post. Por favor, intenta más tarde.",
+            message:
+              "Ha ocurrido un error al crear el post. Por favor, intenta más tarde.",
           });
           return;
         }
@@ -90,7 +88,9 @@ app.post('/posts', upload.single('imagen'), (req, res) => {
       }
     );
   } else {
-    res.status(400).send({ message: "El post debe tener un título y un contenido." });
+    res
+      .status(400)
+      .send({ message: "El post debe tener un título y un contenido." });
   }
 });
 
@@ -102,13 +102,16 @@ app.delete("/posts/:id", (req, res) => {
     if (err) {
       console.error("Error al eliminar el post:", err);
       res.status(500).json({
-        message: "Ha ocurrido un error al eliminar el post. Por favor, intenta más tarde.",
+        message:
+          "Ha ocurrido un error al eliminar el post. Por favor, intenta más tarde.",
       });
       return;
     }
 
     if (result.affectedRows === 0) {
-      res.status(404).json({ message: "No se encontró el post con el ID especificado." });
+      res
+        .status(404)
+        .json({ message: "No se encontró el post con el ID especificado." });
       return;
     }
 
