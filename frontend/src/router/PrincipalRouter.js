@@ -7,27 +7,18 @@ import { NewPost } from "../components/pages/NewPost";
 import { NavComponent } from "../components/layout/NavComponent";
 import { FooterComponent } from "../components/layout/FooterComponent";
 
-
 export const RouterPrincipal = () => {
- 
   return (
     <div>
       <BrowserRouter>
-      <NavComponent />
+        <NavComponent />
         <Routes>
-          <Route
-            path="/"
-            element={<BlogHome />}
-          />
+          <Route path="/" element={<BlogHome />} />
           <Route path="/post/:id" element={<BlogPost />} />
-          <Route
-            path="/post/editar"
-            element={<EditPost />}
-          />
-          <Route path="/post/nuevo" element={<NewPost/>} />
-         
+          <Route path="/post/editar" element={<EditPost />} />
+          <Route path="/post/nuevo" element={<NewPost />} />
         </Routes>
-       <FooterComponent />
+        <FooterComponent />
       </BrowserRouter>
     </div>
   );
