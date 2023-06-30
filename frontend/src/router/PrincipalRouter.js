@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { BlogHome } from "../components/pages/BlogHome";
-import { BlogPost } from "../components/pages/BlogPost";
+import {  BlogPostDetail } from "../components/pages/BlogPostDetail";
 import { EditPost } from "../components/pages/EditPost";
 import { NewPost } from "../components/pages/NewPost";
 import { NavComponent } from "../components/layout/NavComponent";
@@ -14,7 +14,7 @@ export const RouterPrincipal = () => {
         <NavComponent />
         <Routes>
           <Route path="/" element={<BlogHome />} />
-          <Route path="/post/:id" element={<BlogPost />} />
+          <Route path="/post/:id" element={<BlogPostDetail />} />
           <Route path="/post/editar" element={<EditPost />} />
           <Route path="/post/nuevo" element={<NewPost />} />
         </Routes>

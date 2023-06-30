@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 
 export const ApiPosts = () => {
   const [posts, setPosts] = useState([]);
@@ -54,16 +55,22 @@ export const ApiPosts = () => {
             <div className="col-md-4 mb-4" key={post.id}>
               <div className="card h-100">
                 <div className="aspect-ratio">
-                  <img
-                    src={`http://localhost:3000/${post.img_post}`}
-                    className="card-img-top"
-                    alt="Imagen del post"
-                  />
+                  <NavLink to={`/post/${post.id}`} activeClassName="active">
+                    <img
+                      src={`http://localhost:3000/${post.img_post}`}
+                      className="card-img-top"
+                      alt="Imagen del post"
+                    />
+                  </NavLink>
                 </div>
                 <div className="card-body d-flex flex-column">
-                  <h5 className="card-title mb-2 text-center" onClick={() => console.log("Click en el título de la entrada")}>
+                  <NavLink
+                    to={`/post/${post.id}`}
+                    className="card-title mb-2 text-center"
+                    activeClassName="active"
+                  >
                     {post.titulo_post}
-                  </h5>
+                  </NavLink>
                   <p className="card-text mb-2 flex-grow-1" style={{ overflow: 'hidden' }}>
                     {post.fecha_publicacion}
                   </p>
@@ -74,7 +81,7 @@ export const ApiPosts = () => {
                     className="btn btn-danger mt-auto"
                     onClick={() => handleDeletePost(post.id)}
                   >
-                    Borrar &times;
+                     Borrar 
                   </button>
                 </div>
               </div>
