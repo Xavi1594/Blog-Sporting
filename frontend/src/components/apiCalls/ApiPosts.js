@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 export const ApiPosts = () => {
   const [posts, setPosts] = useState([]);
+  const [postIdToDelete, setPostIdToDelete] = useState(null);
 
   useEffect(() => {
     fetch("http://localhost:3000/posts")
@@ -13,6 +14,24 @@ export const ApiPosts = () => {
         console.error("Error al obtener los posts:", error);
       });
   }, []);
+
+  const handleDeletePost = async (postId) => {
+    try {
+      const response = await fetch(`http://localhost:3000/posts/${postId}`, {
+        method: "DELETE",
+      });
+
+      if (response.ok) {
+        // Actualizar la lista de posts después de eliminar
+        const updatedPosts = posts.filter((post) => post.id !== postId);
+        setPosts(updatedPosts);
+      } else {
+        throw new Error("Error al eliminar el post");
+      }
+    } catch (error) {
+      console.error("Error al eliminar el post:", error);
+    }
+  };
 
   return (
     <div
@@ -57,9 +76,9 @@ export const ApiPosts = () => {
           </p>
           <button
             className="btn btn-danger"
-            onClick={() => console.log("Click en el botón Borrar")}
+            onClick={() => handleDeletePost(post.id)}
           >
-            &times;
+            Borrar &times;
           </button>
         </article>
       ))}
