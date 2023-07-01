@@ -31,16 +31,18 @@ export const NavComponent = () => {
         </h1>
         <div style={{ width: "80px", height: "160px", marginLeft: "20px" }}>
           <img
-            src="logosporting1.png"
+            src="logosporting.png"
             alt="Logo del Real Sporting de Gijón"
             style={{ width: "100%", height: "100%", objectFit: "contain" }}
           />
         </div>
       </div>
-      <nav>
-        <button onClick={handleCreatePost} className="btn btn-success m-1">
-          Añadir entrada
-        </button>
+      <nav className=" text-black py-2">
+        <div className="container">
+          <button onClick={handleCreatePost} className="btn btn-success m-1">
+            Añadir entrada
+          </button>
+        </div>
       </nav>
     </header>
   );

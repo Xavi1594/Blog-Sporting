@@ -1,7 +1,95 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 
 export const EditPost = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [editedPost, setEditedPost] = useState({
+    titulo_post: "",
+    contenido_post: "",
+    img_post: "",
+  });
+
+  useEffect(() => {
+    fetch(`http://localhost:3000/posts/${id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setEditedPost(data);
+      })
+      .catch((error) => {
+        console.error("Error al obtener el detalle del post:", error);
+      });
+  }, [id]);
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setEditedPost((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleSaveClick = () => {
+    fetch(`http://localhost:3000/posts/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(editedPost),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Post editado:", data);
+        navigate(`/post/${id}`);
+      })
+      .catch((error) => {
+        console.error("Error al editar el post:", error);
+      });
+  };
+
   return (
-    <div>EditPost</div>
-  )
-}
+    <div>
+      <h1 className="text-center">Editar Post</h1>
+      <form>
+        <div className="form-group">
+          <label>Título:</label>
+          <input
+            type="text"
+            name="titulo_post"
+            className="form-control"
+            value={editedPost.titulo_post}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div lassName="form-group">
+          <label>Contenido:</label>
+          <textarea
+            className="form-control"
+            rows="15"
+            name="contenido_post"
+            value={editedPost.contenido_post}
+            onChange={handleInputChange}
+          ></textarea>
+        </div>
+        <div>
+          <label>Imagen:</label>
+          <input
+            type="text"
+            name="img_post"
+            className="form-control"
+            value={editedPost.img_post}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <button
+          className="btn btn-primary mt-2"
+
+           type="button" onClick={handleSaveClick}>
+            Guardar Cambios
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+};

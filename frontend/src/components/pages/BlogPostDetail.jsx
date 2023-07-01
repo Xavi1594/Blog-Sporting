@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 export const BlogPostDetail = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [post, setPost] = useState(null);
 
   useEffect(() => {
@@ -20,6 +21,10 @@ export const BlogPostDetail = () => {
     return <div>Cargando...</div>;
   }
 
+  const handleEditClick = () => {
+    navigate(`/post/editar/${id}`);
+  };
+
   return (
     <div className="container mt-4">
       <div className="row">
@@ -33,8 +38,9 @@ export const BlogPostDetail = () => {
           <p className="text-center">Fecha de publicación: {post.fecha_publicacion}</p>
           <p>{post.contenido_post}</p>
           <div className="d-flex justify-content-center">
-            <button className="btn btn-primary me-2">Editar</button>
-            <button className="btn btn-secondary me-2">Guardar</button>
+            <button className="btn btn-primary me-2" onClick={handleEditClick}>
+              Editar
+            </button>
             <button className="btn btn-danger">Borrar</button>
           </div>
         </div>

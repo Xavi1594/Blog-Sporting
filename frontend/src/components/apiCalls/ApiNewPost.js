@@ -1,12 +1,19 @@
 import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 export const ApiNewPost = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [image, setImage] = useState(null);
+  const [isPostCreated, setPostCreated] = useState(false);
 
   const handleCreatePost = async () => {
     try {
+      if (!title || !content || !image) {
+        alert('Por favor, complete todos los campos');
+        return;
+      }
+
       const formData = new FormData();
       formData.append('titulo_post', title);
       formData.append('contenido_post', content);
@@ -21,9 +28,11 @@ export const ApiNewPost = () => {
         const data = await response.json();
         console.log(data);
 
+        alert('El post se ha creado correctamente');
         setTitle('');
         setContent('');
         setImage(null);
+        setPostCreated(true);
       } else {
         throw new Error('Error al crear el post');
       }
@@ -31,6 +40,10 @@ export const ApiNewPost = () => {
       console.error('Error al crear el post:', error);
     }
   };
+
+  if (isPostCreated) {
+    return <NavLink to="/" />;
+  }
 
   return (
     <div className="container mt-5">
@@ -79,6 +92,7 @@ export const ApiNewPost = () => {
         >
           Crear entrada
         </button>
+        {isPostCreated && <NavLink to="/" />}
       </form>
     </div>
   );
