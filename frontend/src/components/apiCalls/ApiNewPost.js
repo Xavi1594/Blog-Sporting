@@ -41,10 +41,6 @@ export const ApiNewPost = () => {
     }
   };
 
-  if (isPostCreated) {
-    return <NavLink to="/" />;
-  }
-
   return (
     <div className="container mt-5">
       <h2 className="mb-4 text-center">Nueva entrada</h2>
@@ -79,20 +75,15 @@ export const ApiNewPost = () => {
           <div className="form-group">
             <label>Vista previa de la imagen:</label>
             <img
-              src={`http://localhost:3000/${image.name}`}
+              src={URL.createObjectURL(image)}
               alt="Vista previa"
               className="img-fluid"
             />
           </div>
         )}
-        <button
-          type="button"
-          className="btn btn-primary mt-2"
-          onClick={handleCreatePost}
-        >
+        <NavLink to="/" className="btn btn-primary mt-2" onClick={handleCreatePost}>
           Crear entrada
-        </button>
-        {isPostCreated && <NavLink to="/" />}
+        </NavLink>
       </form>
     </div>
   );
