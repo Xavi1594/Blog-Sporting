@@ -41,13 +41,15 @@ export const  NewPost = () => {
     }
   };
 
+  
   return (
     <div className="container mt-5">
       <h2 className="mb-4 text-center">Nueva entrada</h2>
       <form>
         <div className="form-group">
-          <label>Título</label>
+          <label htmlFor="titleInput">Título</label>
           <input
+            id="titleInput"
             type="text"
             className="form-control"
             value={title}
@@ -55,8 +57,9 @@ export const  NewPost = () => {
           />
         </div>
         <div className="form-group">
-          <label>Contenido</label>
+          <label htmlFor="contentTextarea">Contenido</label>
           <textarea
+            id="contentTextarea"
             className="form-control"
             rows="15"
             value={content}
@@ -64,23 +67,25 @@ export const  NewPost = () => {
           ></textarea>
         </div>
         <div className="form-group">
-          <label>Imagen</label>
+          <label htmlFor="imageInput">Imagen</label>
           <input
+            id="imageInput"
             type="file"
             className="form-control"
             onChange={(e) => setImage(e.target.files[0])}
           />
         </div>
         {image && (
-          <div className="form-group">
-            <label>Vista previa de la imagen:</label>
-            <img
-              src={URL.createObjectURL(image)}
-              alt="Vista previa"
-              className="img-fluid"
-            />
-          </div>
-        )}
+  <div className="form-group">
+    <label>Vista previa de la imagen:</label>
+    <img
+      src="https://example.com/path/to/image.jpg" // Reemplaza con una URL de imagen válida
+      alt="Vista previa"
+      className="img-fluid"
+    />
+  </div>
+)}
+
         <NavLink to="/" className="btn btn-primary mt-2" onClick={handleCreatePost}>
           Crear entrada
         </NavLink>

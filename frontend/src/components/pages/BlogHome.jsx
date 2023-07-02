@@ -64,7 +64,7 @@ export const BlogHome = () => {
   };
 
   return (
-    <div className="mt-3 mb-3  container">
+    <div className="mt-3 mb-3  container " data-testid="blog-home">
       <SearchBar onSearch={searchPosts} />
       <section className="row mt-3">
         {currentPosts.map((post) => (
