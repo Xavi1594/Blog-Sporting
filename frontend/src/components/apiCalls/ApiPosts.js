@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import SearchBar from "../layout/SearchBarComponent";
 
 export const ApiPosts = () => {
   const [posts, setPosts] = useState([]);
+  const [filteredPosts, setFilteredPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(6);
 
@@ -18,6 +20,7 @@ export const ApiPosts = () => {
             return dateB - dateA;
           });
           setPosts(sortedPosts);
+          setFilteredPosts(sortedPosts);
         } else {
           throw new Error("Error al obtener los posts");
         }
@@ -43,6 +46,7 @@ export const ApiPosts = () => {
       if (response.ok) {
         const updatedPosts = posts.filter((post) => post.id !== postId);
         setPosts(updatedPosts);
+        setFilteredPosts(updatedPosts);
       } else {
         throw new Error("Error al eliminar el post");
       }
@@ -53,7 +57,7 @@ export const ApiPosts = () => {
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -66,9 +70,21 @@ export const ApiPosts = () => {
     return text.substring(0, maxLength).trim() + "...";
   };
 
+  const searchPosts = (searchTerm) => {
+    if (searchTerm) {
+      const filtered = posts.filter((post) =>
+        post.titulo_post.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setFilteredPosts(filtered);
+    } else {
+      setFilteredPosts(posts);
+    }
+  };
+
   return (
-    <div className="mt-3 container">
-      <div className="row">
+    <div className="mt-3 mb-3  container">
+      <SearchBar onSearch={searchPosts} />
+      <div className="row mt-3  ">
         {currentPosts.map((post) => (
           <div className="col-lg-4 col-md-6 mb-4" key={post.id}>
             <div className="card h-100">
@@ -115,7 +131,7 @@ export const ApiPosts = () => {
               Previous
             </a>
           </li>
-          {[...Array(Math.ceil(posts.length / postsPerPage)).keys()].map(
+          {[...Array(Math.ceil(filteredPosts.length / postsPerPage)).keys()].map(
             (pageNumber) => (
               <li
                 key={pageNumber + 1}
@@ -135,7 +151,7 @@ export const ApiPosts = () => {
           )}
           <li
             className={`page-item ${
-              currentPage === Math.ceil(posts.length / postsPerPage)
+              currentPage === Math.ceil(filteredPosts.length / postsPerPage)
                 ? "disabled"
                 : ""
             }`}
