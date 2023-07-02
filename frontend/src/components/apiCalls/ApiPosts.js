@@ -37,7 +37,6 @@ export const ApiPosts = () => {
     return date.toLocaleDateString(undefined, options);
   };
 
-
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
@@ -67,9 +66,9 @@ export const ApiPosts = () => {
   return (
     <div className="mt-3 mb-3  container">
       <SearchBar onSearch={searchPosts} />
-      <div className="row mt-3  ">
+      <section className="row mt-3">
         {currentPosts.map((post) => (
-          <div className="col-lg-4 col-md-6 mb-4" key={post.id}>
+          <article className="col-lg-4 col-md-6 mb-4" key={post.id}>
             <div className="card h-100">
               <NavLink to={`/post/${post.id}`} activeClassName="active">
                 <img
@@ -89,15 +88,15 @@ export const ApiPosts = () => {
                   {post.titulo_post}
                 </NavLink>
                 <p className="card-text mb-2">{formatDate(post.fecha_post)}</p>
-                <p className="card-text mb-2">{truncateText(post.contenido_post, 50)}</p>
+                <p className="card-text mb-2">
+                  {truncateText(post.contenido_post, 50)}
+                </p>
               </div>
-              <div className="card-footer">
-               
-              </div>
+              <div className="card-footer"></div>
             </div>
-          </div>
+          </article>
         ))}
-      </div>
+      </section>
       <nav aria-label="Page navigation example">
         <ul className="pagination justify-content-center mb-5">
           <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
@@ -109,24 +108,24 @@ export const ApiPosts = () => {
               Previous
             </a>
           </li>
-          {[...Array(Math.ceil(filteredPosts.length / postsPerPage)).keys()].map(
-            (pageNumber) => (
-              <li
-                key={pageNumber + 1}
-                className={`page-item ${
-                  currentPage === pageNumber + 1 ? "active" : ""
-                }`}
+          {[
+            ...Array(Math.ceil(filteredPosts.length / postsPerPage)).keys(),
+          ].map((pageNumber) => (
+            <li
+              key={pageNumber + 1}
+              className={`page-item ${
+                currentPage === pageNumber + 1 ? "active" : ""
+              }`}
+            >
+              <a
+                className="page-link"
+                href="#"
+                onClick={() => paginate(pageNumber + 1)}
               >
-                <a
-                  className="page-link"
-                  href="#"
-                  onClick={() => paginate(pageNumber + 1)}
-                >
-                  {pageNumber + 1}
-                </a>
-              </li>
-            )
-          )}
+                {pageNumber + 1}
+              </a>
+            </li>
+          ))}
           <li
             className={`page-item ${
               currentPage === Math.ceil(filteredPosts.length / postsPerPage)

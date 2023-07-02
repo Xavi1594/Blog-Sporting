@@ -32,18 +32,22 @@ export const BlogPostDetail = () => {
   };
 
   const handleDeletePost = async () => {
-    try {
-      const response = await fetch(`http://localhost:3000/posts/${id}`, {
-        method: "DELETE",
-      });
+    const confirmed = window.confirm("¿Estás seguro de que quieres borrar el post?");
+    if (confirmed) {
+      try {
+        const response = await fetch(`http://localhost:3000/posts/${id}`, {
+          method: "DELETE",
+        });
 
-      if (response.ok) {
-        navigate("/"); // Redirige a la página principal después de eliminar el post
-      } else {
-        throw new Error("Error al eliminar el post");
+        if (response.ok) {
+          navigate("/");
+          window.alert("El post ha sido borrado exitosamente.");
+        } else {
+          throw new Error("Error al eliminar el post");
+        }
+      } catch (error) {
+        console.error("Error al eliminar el post:", error);
       }
-    } catch (error) {
-      console.error("Error al eliminar el post:", error);
     }
   };
 
