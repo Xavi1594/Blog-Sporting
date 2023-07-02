@@ -7,7 +7,7 @@ export const EditPost = () => {
   const [editedPost, setEditedPost] = useState({
     titulo_post: "",
     contenido_post: "",
-    img_post: "",
+    img_post: null,
   });
 
   useEffect(() => {
@@ -29,26 +29,36 @@ export const EditPost = () => {
     }));
   };
 
-  const handleSaveClick = () => {
-    fetch(`http://localhost:3000/posts/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title: editedPost.titulo_post,
-        content: editedPost.contenido_post,
-        user_img: editedPost.img_post,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    setEditedPost((prevState) => ({
+      ...prevState,
+      img_post: file,
+    }));
+  };
+
+  const handleSaveClick = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("titulo_post", editedPost.titulo_post);
+      formData.append("contenido_post", editedPost.contenido_post);
+      formData.append("img_post", editedPost.img_post);
+
+      const response = await fetch(`http://localhost:3000/posts/${id}`, {
+        method: "PUT",
+        body: formData,
+      });
+
+      if (response.ok) {
+        const data = await response.json();
         console.log("Post editado:", data);
         navigate(`/post/${id}`);
-      })
-      .catch((error) => {
-        console.error("Error al editar el post:", error);
-      });
+      } else {
+        throw new Error("Error al editar el post");
+      }
+    } catch (error) {
+      console.error("Error al editar el post:", error);
+    }
   };
 
   return (
@@ -80,11 +90,11 @@ export const EditPost = () => {
             <div className="form-group">
               <label>Imagen:</label>
               <input
-                type="text"
+                type="file"
                 name="img_post"
                 className="form-control"
-                value={editedPost.img_post || ""}
-                onChange={handleInputChange}
+                accept="image/*"
+                onChange={handleImageChange}
               />
             </div>
             <div>
@@ -98,4 +108,3 @@ export const EditPost = () => {
     </div>
   );
 };
-  
