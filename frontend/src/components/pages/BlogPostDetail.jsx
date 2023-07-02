@@ -6,6 +6,12 @@ export const BlogPostDetail = () => {
   const navigate = useNavigate();
   const [post, setPost] = useState(null);
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return date.toLocaleDateString(undefined, options);
+  };
+
   useEffect(() => {
     fetch(`http://localhost:3000/posts/${id}`)
       .then((response) => response.json())
@@ -29,15 +35,19 @@ export const BlogPostDetail = () => {
     <div className="container mt-4">
       <div className="row">
         <div className="col-md-8 offset-md-2">
-          <img
-            src={`http://localhost:3000/${post.img_post}`}
-            className="img-fluid mb-4"
-            alt="Imagen del post"
-          />
-          <h1 className="text-center">{post.titulo_post}</h1>
-          <p className="text-center">Fecha de publicación: {post.fecha_publicacion}</p>
-          <p>{post.contenido_post}</p>
-          <div className="d-flex justify-content-center">
+          <div className="d-flex justify-content-center"> 
+            <img
+              src={`http://localhost:3000/${post.img_post}`}
+              className="img-fluid rounded mb-4"
+              alt="Imagen del post"
+            />
+          </div>
+          <div className="post-content" style={{ background: "#f7f7f7", padding: "20px" }}>
+            <h1 className="text-center">{post.titulo_post}</h1>
+            <p className="text-center">Fecha de publicación: {formatDate(post.fecha_post)}</p>
+            <p>{post.contenido_post}</p>
+          </div>
+          <div className="d-flex justify-content-center mt-2">
             <button className="btn btn-primary me-2" onClick={handleEditClick}>
               Editar
             </button>

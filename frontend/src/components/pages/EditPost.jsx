@@ -35,7 +35,11 @@ export const EditPost = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(editedPost),
+      body: JSON.stringify({
+        title: editedPost.titulo_post,
+        content: editedPost.contenido_post,
+        user_img: editedPost.img_post,
+      }),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -45,7 +49,7 @@ export const EditPost = () => {
       .catch((error) => {
         console.error("Error al editar el post:", error);
       });
-  };
+};
 
   return (
     <div>
@@ -57,35 +61,32 @@ export const EditPost = () => {
             type="text"
             name="titulo_post"
             className="form-control"
-            value={editedPost.titulo_post}
+            value={editedPost.titulo_post || ""}
             onChange={handleInputChange}
           />
         </div>
-        <div lassName="form-group">
+        <div className="form-group">
           <label>Contenido:</label>
           <textarea
             className="form-control"
             rows="15"
             name="contenido_post"
-            value={editedPost.contenido_post}
+            value={editedPost.contenido_post || ""}
             onChange={handleInputChange}
           ></textarea>
         </div>
-        <div>
+        <div className="form-group">
           <label>Imagen:</label>
           <input
             type="text"
             name="img_post"
             className="form-control"
-            value={editedPost.img_post}
+            value={editedPost.img_post || ""}
             onChange={handleInputChange}
           />
         </div>
         <div>
-          <button
-          className="btn btn-primary mt-2"
-
-           type="button" onClick={handleSaveClick}>
+          <button className="btn btn-primary mt-2" type="button" onClick={handleSaveClick}>
             Guardar Cambios
           </button>
         </div>

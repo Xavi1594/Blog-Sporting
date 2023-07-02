@@ -29,7 +29,7 @@ export const ApiPosts = () => {
       });
 
       if (response.ok) {
-        // Actualizar la lista de posts después de eliminar
+      
         const updatedPosts = posts.filter((post) => post.id !== postId);
         setPosts(updatedPosts);
       } else {
@@ -55,16 +55,6 @@ export const ApiPosts = () => {
     return text.substring(0, maxLength).trim() + "...";
   };
 
-  const getImageStyles = (imageUrl) => {
-    return {
-      backgroundImage: `url(${imageUrl})`,
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-      height: "100%",
-      width: "100%",
-    };
-  };
-
   return (
     <div className="mt-3 container">
       <div className="row">
@@ -72,9 +62,12 @@ export const ApiPosts = () => {
           <div className="col-lg-4 col-md-6 mb-4" key={post.id}>
             <div className="card h-100">
               <NavLink to={`/post/${post.id}`} activeClassName="active">
-                <div className="image-container" style={{ height: "250px" }}>
-                  <div className="image" style={getImageStyles(`http://localhost:3000/${post.img_post}`)}></div>
-                </div>
+                <img
+                  src={`http://localhost:3000/${post.img_post}`}
+                  className="card-img-top img-fluid"
+                  alt="Imagen del post"
+                  style={{ height: "250px", objectFit: "cover" }}
+                />
               </NavLink>
               <div className="card-body">
                 <NavLink
