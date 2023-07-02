@@ -31,20 +31,41 @@ export const BlogPostDetail = () => {
     navigate(`/post/editar/${id}`);
   };
 
+  const handleDeletePost = async () => {
+    try {
+      const response = await fetch(`http://localhost:3000/posts/${id}`, {
+        method: "DELETE",
+      });
+
+      if (response.ok) {
+        navigate("/"); // Redirige a la página principal después de eliminar el post
+      } else {
+        throw new Error("Error al eliminar el post");
+      }
+    } catch (error) {
+      console.error("Error al eliminar el post:", error);
+    }
+  };
+
   return (
     <div className="container mt-4">
       <div className="row">
         <div className="col-md-8 offset-md-2">
-          <div className="d-flex justify-content-center"> 
+          <div className="d-flex justify-content-center">
             <img
               src={`http://localhost:3000/${post.img_post}`}
               className="img-fluid rounded mb-4"
               alt="Imagen del post"
             />
           </div>
-          <div className="post-content" style={{ background: "#f7f7f7", padding: "20px" }}>
+          <div
+            className="post-content"
+            style={{ background: "#f7f7f7", padding: "20px" }}
+          >
             <h1 className="text-center">{post.titulo_post}</h1>
-            <p className="text-center">Fecha de publicación: {formatDate(post.fecha_post)}</p>
+            <p className="text-center">
+              Fecha de publicación: {formatDate(post.fecha_post)}
+            </p>
             <textarea
               className="form-control"
               rows="15"
@@ -57,11 +78,12 @@ export const BlogPostDetail = () => {
             <button className="btn btn-primary me-2" onClick={handleEditClick}>
               Editar
             </button>
-            <button className="btn btn-danger">Borrar</button>
+            <button className="btn btn-danger" onClick={handleDeletePost}>
+              Borrar
+            </button>
           </div>
         </div>
       </div>
     </div>
   );
 };
-  

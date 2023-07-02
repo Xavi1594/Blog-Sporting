@@ -37,23 +37,6 @@ export const ApiPosts = () => {
     return date.toLocaleDateString(undefined, options);
   };
 
-  const handleDeletePost = async (postId) => {
-    try {
-      const response = await fetch(`http://localhost:3000/posts/${postId}`, {
-        method: "DELETE",
-      });
-
-      if (response.ok) {
-        const updatedPosts = posts.filter((post) => post.id !== postId);
-        setPosts(updatedPosts);
-        setFilteredPosts(updatedPosts);
-      } else {
-        throw new Error("Error al eliminar el post");
-      }
-    } catch (error) {
-      console.error("Error al eliminar el post:", error);
-    }
-  };
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -109,12 +92,7 @@ export const ApiPosts = () => {
                 <p className="card-text mb-2">{truncateText(post.contenido_post, 50)}</p>
               </div>
               <div className="card-footer">
-                <button
-                  className="btn btn-danger"
-                  onClick={() => handleDeletePost(post.id)}
-                >
-                  Borrar
-                </button>
+               
               </div>
             </div>
           </div>
