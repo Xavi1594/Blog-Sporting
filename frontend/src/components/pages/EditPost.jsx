@@ -49,48 +49,53 @@ export const EditPost = () => {
       .catch((error) => {
         console.error("Error al editar el post:", error);
       });
-};
+  };
 
   return (
-    <div>
-      <h1 className="text-center">Editar Post</h1>
-      <form>
-        <div className="form-group">
-          <label>Título:</label>
-          <input
-            type="text"
-            name="titulo_post"
-            className="form-control"
-            value={editedPost.titulo_post || ""}
-            onChange={handleInputChange}
-          />
+    <div className="container">
+      <div className="row justify-content-center">
+        <div className="col-md-6">
+          <h1 className="text-center">Editar Post</h1>
+          <form>
+            <div className="form-group">
+              <label>Título:</label>
+              <input
+                type="text"
+                name="titulo_post"
+                className="form-control"
+                value={editedPost.titulo_post || ""}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="form-group">
+              <label>Contenido:</label>
+              <textarea
+                className="form-control"
+                rows="15"
+                name="contenido_post"
+                value={editedPost.contenido_post || ""}
+                onChange={handleInputChange}
+              ></textarea>
+            </div>
+            <div className="form-group">
+              <label>Imagen:</label>
+              <input
+                type="text"
+                name="img_post"
+                className="form-control"
+                value={editedPost.img_post || ""}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div>
+              <button className="btn btn-primary mt-2" type="button" onClick={handleSaveClick}>
+                Guardar Cambios
+              </button>
+            </div>
+          </form>
         </div>
-        <div className="form-group">
-          <label>Contenido:</label>
-          <textarea
-            className="form-control"
-            rows="15"
-            name="contenido_post"
-            value={editedPost.contenido_post || ""}
-            onChange={handleInputChange}
-          ></textarea>
-        </div>
-        <div className="form-group">
-          <label>Imagen:</label>
-          <input
-            type="text"
-            name="img_post"
-            className="form-control"
-            value={editedPost.img_post || ""}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div>
-          <button className="btn btn-primary mt-2" type="button" onClick={handleSaveClick}>
-            Guardar Cambios
-          </button>
-        </div>
-      </form>
+      </div>
     </div>
   );
 };
+  

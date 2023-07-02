@@ -45,7 +45,13 @@ export const BlogPostDetail = () => {
           <div className="post-content" style={{ background: "#f7f7f7", padding: "20px" }}>
             <h1 className="text-center">{post.titulo_post}</h1>
             <p className="text-center">Fecha de publicación: {formatDate(post.fecha_post)}</p>
-            <p>{post.contenido_post}</p>
+            <textarea
+              className="form-control"
+              rows="15"
+              style={{ wordWrap: "break-word" }}
+              value={post.contenido_post}
+              readOnly
+            ></textarea>
           </div>
           <div className="d-flex justify-content-center mt-2">
             <button className="btn btn-primary me-2" onClick={handleEditClick}>
@@ -58,3 +64,4 @@ export const BlogPostDetail = () => {
     </div>
   );
 };
+  
