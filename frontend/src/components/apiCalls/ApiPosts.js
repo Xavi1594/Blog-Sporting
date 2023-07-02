@@ -17,6 +17,11 @@ export const ApiPosts = () => {
       });
   }, []);
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return date.toLocaleDateString(undefined, options);
+  };
   const handleDeletePost = async (postId) => {
     try {
       const response = await fetch(`http://localhost:3000/posts/${postId}`, {
@@ -35,7 +40,6 @@ export const ApiPosts = () => {
     }
   };
 
-  // Obtener los índices de los posts para la página actual
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
@@ -51,37 +55,42 @@ export const ApiPosts = () => {
     return text.substring(0, maxLength).trim() + "...";
   };
 
+  const getImageStyles = (imageUrl) => {
+    return {
+      backgroundImage: `url(${imageUrl})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      height: "100%",
+      width: "100%",
+    };
+  };
+
   return (
-    <div className="mt-3">
+    <div className="mt-3 container">
       <div className="row">
         {currentPosts.map((post) => (
-          <div className="col-md-4 mb-4" key={post.id}>
+          <div className="col-lg-4 col-md-6 mb-4" key={post.id}>
             <div className="card h-100">
-              <div className="aspect-ratio">
-                <NavLink to={`/post/${post.id}`} activeClassName="active">
-                  <img
-                    src={`http://localhost:3000/${post.img_post}`}
-                    className="card-img-top"
-                    alt="Imagen del post"
-                  />
-                </NavLink>
-              </div>
-              <div className="card-body d-flex flex-column">
+              <NavLink to={`/post/${post.id}`} activeClassName="active">
+                <div className="image-container" style={{ height: "250px" }}>
+                  <div className="image" style={getImageStyles(`http://localhost:3000/${post.img_post}`)}></div>
+                </div>
+              </NavLink>
+              <div className="card-body">
                 <NavLink
                   to={`/post/${post.id}`}
-                  className="card-title mb-2 text-center"
+                  className="h2 mb-2 text-center"
                   activeClassName="active"
+                  style={{ textDecoration: "none" }}
                 >
                   {post.titulo_post}
                 </NavLink>
-                <p className="card-text mb-2 flex-grow-1" style={{ overflow: 'hidden' }}>
-                  {post.fecha_publicacion}
-                </p>
-                <p className="card-text mb-2" style={{ maxHeight: '100px', overflow: 'hidden' }}>
-                  {truncateText(post.contenido_post, 50)}
-                </p>
+                <p className="card-text mb-2">{formatDate(post.fecha_post)}</p>
+                <p className="card-text mb-2">{truncateText(post.contenido_post, 50)}</p>
+              </div>
+              <div className="card-footer">
                 <button
-                  className="btn btn-danger mt-auto"
+                  className="btn btn-danger"
                   onClick={() => handleDeletePost(post.id)}
                 >
                   Borrar
@@ -92,7 +101,7 @@ export const ApiPosts = () => {
         ))}
       </div>
       <nav aria-label="Page navigation example">
-        <ul className="pagination">
+        <ul className="pagination justify-content-center mb-5">
           <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
             <a
               className="page-link"
@@ -140,5 +149,3 @@ export const ApiPosts = () => {
     </div>
   );
 };
-
-

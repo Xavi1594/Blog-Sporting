@@ -5,7 +5,7 @@ export const FooterComponent = () => {
 
   return (
     <footer
-      className="text-center"
+      className="text-center container-fluid fixed py-3 mt-5"
       style={{
         background: "#e30613",
         color: "#ffffff",
