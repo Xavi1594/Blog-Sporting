@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 export const  NewPost = () => {
   const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+  const [content, setContent] = useState(''); 
   const [image, setImage] = useState(null);
   const [isPostCreated, setPostCreated] = useState(false);
 

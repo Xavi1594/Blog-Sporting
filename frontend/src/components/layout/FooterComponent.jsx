@@ -5,12 +5,11 @@ export const FooterComponent = () => {
 
   return (
     <footer
-      className="text-center container-fluid fixed py-3 mt-5"
+      className="text-center container-fluid fixed-bottom py-3"
       style={{
         background: "#e30613",
         color: "#ffffff",
         backdropFilter: "blur(5px)",
-        marginTop: "auto",
         padding: "20px",
       }}
     >

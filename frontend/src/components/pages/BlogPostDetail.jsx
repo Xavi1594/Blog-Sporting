@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { PencilSquare, Trash } from 'react-bootstrap-icons';
 
 export const BlogPostDetail = () => {
   const { id } = useParams();
@@ -80,10 +81,10 @@ export const BlogPostDetail = () => {
           </div>
           <div className="d-flex justify-content-center mt-2">
             <button className="btn btn-primary me-2" onClick={handleEditClick}>
-              Editar
+              <PencilSquare /> 
             </button>
             <button className="btn btn-danger" onClick={handleDeletePost}>
-              Borrar
+              <Trash /> 
             </button>
           </div>
         </div>

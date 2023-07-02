@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import {Save}  from 'react-bootstrap-icons';
 
 export const EditPost = () => {
   const { id } = useParams();
@@ -98,8 +99,8 @@ export const EditPost = () => {
               />
             </div>
             <div>
-              <button className="btn btn-primary mt-2" type="button" onClick={handleSaveClick}>
-                Guardar Cambios
+              <button className="btn btn-primary mt-2 w-100 " type="button" onClick={handleSaveClick}>
+              <Save /> Guardar cambios
               </button>
             </div>
           </form>
