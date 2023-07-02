@@ -7,14 +7,25 @@ export const ApiPosts = () => {
   const [postsPerPage] = useState(6);
 
   useEffect(() => {
-    fetch("http://localhost:3000/posts")
-      .then((response) => response.json())
-      .then((data) => {
-        setPosts(data);
-      })
-      .catch((error) => {
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/posts");
+        if (response.ok) {
+          const data = await response.json();
+          const sortedPosts = data.sort((a, b) => {
+            const dateA = new Date(a.fecha_post);
+            const dateB = new Date(b.fecha_post);
+            return dateB - dateA;
+          });
+          setPosts(sortedPosts);
+        } else {
+          throw new Error("Error al obtener los posts");
+        }
+      } catch (error) {
         console.error("Error al obtener los posts:", error);
-      });
+      }
+    };
+    fetchPosts();
   }, []);
 
   const formatDate = (dateString) => {
@@ -22,6 +33,7 @@ export const ApiPosts = () => {
     const options = { year: "numeric", month: "long", day: "numeric" };
     return date.toLocaleDateString(undefined, options);
   };
+
   const handleDeletePost = async (postId) => {
     try {
       const response = await fetch(`http://localhost:3000/posts/${postId}`, {
@@ -29,7 +41,6 @@ export const ApiPosts = () => {
       });
 
       if (response.ok) {
-      
         const updatedPosts = posts.filter((post) => post.id !== postId);
         setPosts(updatedPosts);
       } else {
