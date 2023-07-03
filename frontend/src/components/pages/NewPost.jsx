@@ -79,7 +79,7 @@ export const NewPost = () => {
             <img
               src={URL.createObjectURL(image)}
               alt="Vista previa"
-              className="img-fluid rounded"
+              className="img-fluid rounded mt-2"
             />
           </div>
         )}
