@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 
-const SearchBar = ({ onSearch, usuariosRegistrados, setUsuariosRegistrados }) => {
+const SearchBar = ({
+  onSearch,
+  usuariosRegistrados,
+  setUsuariosRegistrados,
+}) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearch = (event) => {

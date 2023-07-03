@@ -50,7 +50,6 @@ export const EditPost = () => {
       formData.append("titulo_post", editedPost.titulo_post);
       formData.append("contenido_post", editedPost.contenido_post);
 
-      // Si no se seleccionó un nuevo archivo, no se agrega el campo de imagen al formulario.
       if (editedPost.img_post) {
         formData.append("img_post", editedPost.img_post);
       }
@@ -62,7 +61,7 @@ export const EditPost = () => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log("Post editado:", data);
+
         navigate(`/post/${id}`);
       } else {
         throw new Error("Error al editar el post");
@@ -71,8 +70,6 @@ export const EditPost = () => {
       console.error("Error al editar el post:", error);
     }
   };
-
-
 
   return (
     <div className="container">
@@ -110,7 +107,9 @@ export const EditPost = () => {
                 onChange={handleImageChange}
               />
               {initialPost.img_post && (
-                <p className="text-muted">Imagen actual: {initialPost.img_post}</p>
+                <p className="text-muted">
+                  Imagen actual: {initialPost.img_post}
+                </p>
               )}
             </div>
             <div>

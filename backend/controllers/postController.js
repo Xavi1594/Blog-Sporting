@@ -132,7 +132,9 @@ exports.deletePost = (req, res) => {
           return;
         }
 
-        res.json({ message: "El post y la foto han sido eliminados correctamente." });
+        res.json({
+          message: "El post y la foto han sido eliminados correctamente.",
+        });
       });
     });
   });
@@ -151,7 +153,11 @@ exports.updatePost = (req, res) => {
     return;
   }
 
-  const sqlUpdateFields = ["titulo_post = ?", "contenido_post = ?", "fecha_post = ?"];
+  const sqlUpdateFields = [
+    "titulo_post = ?",
+    "contenido_post = ?",
+    "fecha_post = ?",
+  ];
   const sqlUpdateValues = [titulo_post, contenido_post, updatedAt];
 
   let img_post = null;
@@ -162,27 +168,23 @@ exports.updatePost = (req, res) => {
   }
 
   const sql = `UPDATE posts SET ${sqlUpdateFields.join(", ")} WHERE id = ?`;
-  db.query(
-    sql,
-    [...sqlUpdateValues, postId],
-    (err, result) => {
-      if (err) {
-        console.error("Error al editar el post:", err);
-        res.status(500).json({
-          message:
-            "Ha ocurrido un error al editar el post. Por favor, intenta más tarde.",
-        });
-        return;
-      }
-
-      if (result.affectedRows === 0) {
-        res
-          .status(404)
-          .json({ message: "No se encontró el post con el ID especificado." });
-        return;
-      }
-
-      res.json({ message: "El post ha sido editado correctamente." });
+  db.query(sql, [...sqlUpdateValues, postId], (err, result) => {
+    if (err) {
+      console.error("Error al editar el post:", err);
+      res.status(500).json({
+        message:
+          "Ha ocurrido un error al editar el post. Por favor, intenta más tarde.",
+      });
+      return;
     }
-  );
+
+    if (result.affectedRows === 0) {
+      res
+        .status(404)
+        .json({ message: "No se encontró el post con el ID especificado." });
+      return;
+    }
+
+    res.json({ message: "El post ha sido editado correctamente." });
+  });
 };

@@ -13,34 +13,38 @@ export const NavComponent = () => {
   };
 
   return (
-    <header
-      className="text-center"
-      style={{
-        background: "#e30613",
-        color: "#ffffff",
-        backdropFilter: "blur(5px)",
-      }}
-    >
-      <div className="d-flex align-items-center justify-content-center">
-        <h1
-          className="mr-4"
-          style={{ cursor: "pointer" }}
-          onClick={handleTitleClick}
-        >
-          El balón de Gijón
-        </h1>
-        <div style={{ width: "80px", height: "160px", marginLeft: "20px" }}>
-          <img
-            src="pelota.png"
-            alt="Logo de un balón"
-            style={{ width: "100%", height: "100%", objectFit: "contain" }}
-          />
-        </div>
-      </div>
-      <nav
-        className=" text-black py-2"
+    <div>
+      <header
+        className="text-center"
         style={{
-          background: "rgb(201, 218, 233)",
+          background: "#e30613",
+          color: "#ffffff",
+          backdropFilter: "blur(5px)",
+        }}
+      >
+        <div className="d-flex align-items-center justify-content-center">
+          <h1
+            className="mr-4"
+            style={{ cursor: "pointer" }}
+            onClick={handleTitleClick}
+          >
+            EL BALÓN DE GIJÓN
+          </h1>
+          <div style={{ width: "80px", height: "160px", marginLeft: "20px" }}>
+            <img
+              src="pelota.png"
+              alt="Logo de un balón"
+              style={{ width: "100%", height: "100%", objectFit: "contain" }}
+            />
+          </div>
+        </div>
+      </header>
+      <nav
+        className="text-center py-2"
+        style={{
+    
+          color: "#ffffff",
+          backdropFilter: "blur(5px)",
         }}
       >
         <div className="container">
@@ -49,6 +53,6 @@ export const NavComponent = () => {
           </button>
         </div>
       </nav>
-    </header>
+    </div>
   );
 };
