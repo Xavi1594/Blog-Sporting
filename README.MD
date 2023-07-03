@@ -1,5 +1,15 @@
 # Blog - EL BALÓN DE GIJÓN
+<<<<<<< HEAD
 ![Captura 1]("captura 1.png")
+=======
+## Resultado final 
+![Alt text](<captura 1.png>)
+![Alt text](<captura 2.png>)
+![Alt text](<captura 3.png>)
+![Alt text](<captura 4.png>)
+![Alt text](<captura 5.png>)
+
+>>>>>>> 42439c93a7b197f9cb782fe4077555ab791a5ccb
 
 ## Descripción y navegación
 - El proyecto trata de un blog para seguir la actualidad del Real Sporting de Gijón, mediante entradas en el blog.
