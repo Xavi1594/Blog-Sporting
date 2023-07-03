@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import {Save}  from 'react-bootstrap-icons';
+import { Save } from "react-bootstrap-icons";
 
 export const EditPost = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [editedPost, setEditedPost] = useState({
+    titulo_post: "",
+    contenido_post: "",
+    img_post: null,
+  });
+  const [initialPost, setInitialPost] = useState({
     titulo_post: "",
     contenido_post: "",
     img_post: null,
@@ -16,6 +21,7 @@ export const EditPost = () => {
       .then((response) => response.json())
       .then((data) => {
         setEditedPost(data);
+        setInitialPost(data);
       })
       .catch((error) => {
         console.error("Error al obtener el detalle del post:", error);
@@ -43,7 +49,11 @@ export const EditPost = () => {
       const formData = new FormData();
       formData.append("titulo_post", editedPost.titulo_post);
       formData.append("contenido_post", editedPost.contenido_post);
-      formData.append("img_post", editedPost.img_post);
+
+      // Si no se seleccionó un nuevo archivo, no se agrega el campo de imagen al formulario.
+      if (editedPost.img_post) {
+        formData.append("img_post", editedPost.img_post);
+      }
 
       const response = await fetch(`http://localhost:3000/posts/${id}`, {
         method: "PUT",
@@ -61,6 +71,8 @@ export const EditPost = () => {
       console.error("Error al editar el post:", error);
     }
   };
+
+
 
   return (
     <div className="container">
@@ -97,10 +109,17 @@ export const EditPost = () => {
                 accept="image/*"
                 onChange={handleImageChange}
               />
+              {initialPost.img_post && (
+                <p className="text-muted">Imagen actual: {initialPost.img_post}</p>
+              )}
             </div>
             <div>
-              <button className="btn btn-primary mt-2 w-100 " type="button" onClick={handleSaveClick}>
-              <Save /> Guardar cambios
+              <button
+                className="btn btn-primary mt-2 w-100"
+                type="button"
+                onClick={handleSaveClick}
+              >
+                <Save /> Guardar cambios
               </button>
             </div>
           </form>

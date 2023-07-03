@@ -189,16 +189,20 @@ app.put("/posts/:id", upload.single("img_post"), (req, res) => {
     return;
   }
 
+  const sqlUpdateFields = ["titulo_post = ?", "contenido_post = ?", "fecha_post = ?"];
+  const sqlUpdateValues = [titulo_post, contenido_post, updatedAt];
+
   let img_post = null;
   if (req.file) {
     img_post = req.file.filename;
+    sqlUpdateFields.push("img_post = ?");
+    sqlUpdateValues.push(img_post);
   }
 
-  const sql =
-    "UPDATE posts SET titulo_post = ?, contenido_post = ?, fecha_post = ?, img_post = ? WHERE id = ?";
+  const sql = `UPDATE posts SET ${sqlUpdateFields.join(", ")} WHERE id = ?`;
   db.query(
     sql,
-    [titulo_post, contenido_post, updatedAt, img_post, postId],
+    [...sqlUpdateValues, postId],
     (err, result) => {
       if (err) {
         console.error("Error al editar el post:", err);
@@ -220,6 +224,7 @@ app.put("/posts/:id", upload.single("img_post"), (req, res) => {
     }
   );
 });
+
 
 app.listen(port, () => {
   console.log(`Servidor iniciado en el puerto ${port}`);

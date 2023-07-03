@@ -79,7 +79,7 @@ export const  NewPost = () => {
   <div className="form-group">
     <label>Vista previa de la imagen:</label>
     <img
-      src="https://example.com/path/to/image.jpg" // Reemplaza con una URL de imagen válida
+     src={URL.createObjectURL(image)} // Reemplaza con una URL de imagen válida
       alt="Vista previa"
       className="img-fluid"
     />

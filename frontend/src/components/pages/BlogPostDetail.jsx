@@ -32,6 +32,7 @@ export const BlogPostDetail = () => {
     navigate(`/post/editar/${id}`);
   };
 
+
   const handleDeletePost = async () => {
     const confirmed = window.confirm("¿Estás seguro de que quieres borrar el post?");
     if (confirmed) {
