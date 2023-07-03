@@ -5,16 +5,17 @@ export const FooterComponent = () => {
 
   return (
     <footer
-    role="contentinfo"
-    className="text-center container-fluid  py-3"
-    style={{
-      background: "#e30613",
-      color: "#ffffff",
-      backdropFilter: "blur(5px)",
-      padding: "20px",
-    }}
-  >
-      <div className="container">
+      role="contentinfo"
+      className="container-fluid py-3 mt-5"
+      style={{
+        background: "#e30613",
+        color: "#ffffff",
+        backdropFilter: "blur(5px)",
+        padding: "20px",
+        marginTop: "auto",
+      }}
+    >
+      <div className="container d-flex justify-content-center">
         <p className="h3">&#169; {currentYear} El balón de Gijón</p>
       </div>
     </footer>
