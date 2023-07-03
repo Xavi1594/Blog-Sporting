@@ -1,5 +1,10 @@
 # Blog - EL BALÓN DE GIJÓN
 ## Resultado final 
+![Alt text](<captura 1.png>)
+![Alt text](<captura 2.png>)
+![Alt text](<captura 3.png>)
+![Alt text](<captura 4.png>)
+![Alt text](<captura 5.png>)
 
 
 ## Descripción y navegación
